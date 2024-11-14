@@ -1262,7 +1262,7 @@ func (ac *addrConn) resetTransport() {
 	ac.updateConnectivityState(connectivity.Connecting, nil)
 	ac.mu.Unlock()
 
-	if err := ac.tryAllAddrs(acCtx, addrs, connectDeadline); err != nil {
+	if err := ac.tryConnectAllAddrs(acCtx, addrs, connectDeadline); err != nil { // grpcx feat
 		ac.cc.resolveNow(resolver.ResolveNowOptions{})
 		ac.mu.Lock()
 		if acCtx.Err() != nil {
